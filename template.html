@@ -25,6 +25,15 @@
     </style>
   </head>
   <body>
+    <h1>Mnemonic to seed</h1>
+    <div style="text-align: center;">
+      <label for="">Menomic</label><br>
+      <textarea name="" id="mnemonic" cols="60" rows="10"></textarea><br><br>
+      <button type="button" onclick="mnemonic2seed()">Convert</button><br><br>
+      <label>Seed</label><br><br>
+      <textarea name="" id="mnemonic-seed" cols="60" rows="3"></textarea>
+    </div>
+
     <h1>Split</h1>
 
     Use this form to split or encode a secret into a number of shared keys using
@@ -220,6 +229,22 @@
       } finally {
         logRestore();
       }
+    }
+
+    function mnemonic2seed() {
+      let mnemonic = document.getElementById("mnemonic").value;
+      document.getElementById("mnemonic").value = "";
+      document.getElementById("mnemonic-seed").value = "";
+
+      if (!ssss.bip39.validateMnemonic(mnemonic)) {
+        alert("Mnemonic invalid");
+        return
+      }
+
+      let seed = ssss.bip39.mnemonicToSeedSync(mnemonic).toString('hex')
+      document.getElementById("mnemonic-seed").value = seed;
+
+      return
     }
 
     </script>

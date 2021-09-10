@@ -5,6 +5,9 @@
   var BN = require('bignumber.js')
   BN.config({EXPONENTIAL_AT: 100})
   var mpz = require('./mpz.js')
+  var bip39 = require('bip39')
+
+  console.log(bip39)
 
   var SSSS
   var MAXDEGREE = 1024
@@ -498,11 +501,15 @@
 
   // Node.js and other environments that support module.exports.
   } else if (typeof module !== 'undefined' && module.exports) {
-    module.exports = SSSS
+    module.exports = {
+      "SSSS": SSSS,
+      "bip39": bip39,
+    }
 
   // Browser
   } else {
     if (!globalObj) globalObj = typeof self !== 'undefined' ? self : Function('return this')() // eslint-disable-line
     globalObj.SSSS = SSSS
+    globalObj.bip39 = bip39
   }
 })(this)
