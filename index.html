@@ -34,6 +34,18 @@
       <textarea name="" id="mnemonic-seed" cols="60" rows="3"></textarea>
     </div>
 
+    <h1>Seed to mnemonic</h1>
+    <div style="text-align: center;">
+      <label for="">Seed</label><br>
+      <textarea name="" id="seed" cols="60" rows="3"></textarea><br><br>
+      <button type="button" onclick="seed2mnemonic()">Convert</button><br><br>
+      <label>Mnemonic</label><br><br>
+      <textarea name="" id="seed-mnemonic" cols="60" rows="10"></textarea>
+    </div>
+
+    <h1>Split</h1>
+
+
     <h1>Split</h1>
 
     Use this form to split or encode a secret into a number of shared keys using
@@ -146,7 +158,7 @@
       https://github.com/gburca/ssss-js</a>
 
     <p>Version:
-ab7fe81
+b8b15be
 
     <script>
 
@@ -35347,8 +35359,21 @@ function config (name) {
         return
       }
 
-      let seed = ssss.bip39.mnemonicToSeedSync(mnemonic).toString('hex')
-      document.getElementById("mnemonic-seed").value = seed;
+      let entropy = ssss.bip39.mnemonicToEntropy(mnemonic)
+      console.log(entropy)
+      document.getElementById("mnemonic-seed").value = entropy;
+
+      return
+    }
+
+    function seed2mnemonic() {
+      let seed = document.getElementById("seed").value;
+      document.getElementById("seed").value = "";
+      document.getElementById("seed-mnemonic").value = "";
+
+      let mnemo = ssss.bip39.entropyToMnemonic(seed)
+      console.log(mnemo)
+      document.getElementById("seed-mnemonic").value = mnemo;
 
       return
     }
