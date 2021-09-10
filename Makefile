@@ -7,7 +7,7 @@ test: npm
 html:
 	git rev-parse --verify --short HEAD > version.txt
 	./node_modules/browserify/bin/cmd.js ssss.js --standalone ssss -o bundle.js
-	./node_modules/preprocessor/bin/preprocess template.html > ssss.html
+	./node_modules/preprocessor/bin/preprocess template.html > index.html
 	rm -f bundle.js
 	rm -f version.txt
 
